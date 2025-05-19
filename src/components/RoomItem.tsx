@@ -1,8 +1,6 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-import { updateRoom } from "../features/rooms/roomSlice";
-
-// Správné importy typů:
+import { updateRoom, removeRoom } from "../features/rooms/roomSlice";
 import type { Room } from "../types/room";
 import type { Zone } from "../types/zone";
 
@@ -18,6 +16,10 @@ const RoomItem: React.FC<Props> = ({ room }) => {
     dispatch(updateRoom({ ...room, zoneId: e.target.value || undefined }));
   };
 
+  const handleDelete = () => {
+    dispatch(removeRoom(room.id));
+  };
+
   return (
     <li>
       <strong>{room.name}</strong> – plocha: {room.area}, objem: {room.volume}
@@ -29,6 +31,9 @@ const RoomItem: React.FC<Props> = ({ room }) => {
           </option>
         ))}
       </select>
+      <button onClick={handleDelete} aria-label="Smazat místnost">
+        🗑️
+      </button>
     </li>
   );
 };
