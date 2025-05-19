@@ -15,7 +15,7 @@ const roomSlice = createSlice({
       return state.filter((r) => r.id !== action.payload);
     },
     updateRoom: (state, action: PayloadAction<Room>) => {
-      const idx = state.findIndex((r) => r.id === action.payload.id); // PAV proc findIndex misto find?
+      const idx = state.findIndex((r) => r.id === action.payload.id);
       if (idx !== -1) state[idx] = action.payload;
     },
   },

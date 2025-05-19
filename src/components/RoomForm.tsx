@@ -1,6 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
-import * as Yup from "yup"; // PAV proc ta hvezdicka?
+import * as Yup from "yup";
 import { useAppDispatch } from "../hooks/hooks";
 import { addRoom } from "../features/rooms/roomSlice";
 import { v4 as uuidv4 } from "uuid";
@@ -8,28 +8,23 @@ import { v4 as uuidv4 } from "uuid";
 interface RoomFormValues {
   name: string;
   area: number | "";
-  volume: number | ""; // PAV proc ty prazdny strings?
+  volume: number | "";
 }
 
 const RoomForm: React.FC = () => {
   const dispatch = useAppDispatch();
-
   const formik = useFormik<RoomFormValues>({
-    initialValues: {
-      name: "",
-      area: "",
-      volume: "",
-    },
+    initialValues: { name: "", area: "", volume: "" },
     validationSchema: Yup.object({
       name: Yup.string().required("Povinné"),
       area: Yup.number()
         .typeError("Musí být číslo")
         .required("Povinné")
-        .positive("Musí být kladné"),
+        .positive(),
       volume: Yup.number()
         .typeError("Musí být číslo")
         .required("Povinné")
-        .positive("Musí být kladné"),
+        .positive(),
     }),
     onSubmit: (values, { resetForm }) => {
       dispatch(
@@ -43,46 +38,59 @@ const RoomForm: React.FC = () => {
       resetForm();
     },
   });
-
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <div>
-        <label htmlFor="name">Jméno místnosti:</label>
+    <form onSubmit={formik.handleSubmit} className="space-y-4 mb-6">
+      <div className="flex flex-col">
+        <label htmlFor="name" className="mb-1 font-medium">
+          Jméno místnosti:
+        </label>
         <input
           id="name"
           name="name"
           value={formik.values.name}
           onChange={formik.handleChange}
+          className="border rounded p-2 focus:ring-2 focus:ring-indigo-400"
         />
         {formik.touched.name && formik.errors.name && (
-          <div>{formik.errors.name}</div>
+          <p className="text-red-500 text-sm">{formik.errors.name}</p>
         )}
       </div>
-      <div>
-        <label htmlFor="area">Plocha:</label>
+      <div className="flex flex-col">
+        <label htmlFor="area" className="mb-1 font-medium">
+          Plocha:
+        </label>
         <input
           id="area"
           name="area"
           value={formik.values.area}
           onChange={formik.handleChange}
+          className="border rounded p-2 focus:ring-2 focus:ring-indigo-400"
         />
         {formik.touched.area && formik.errors.area && (
-          <div>{formik.errors.area}</div>
+          <p className="text-red-500 text-sm">{formik.errors.area}</p>
         )}
       </div>
-      <div>
-        <label htmlFor="volume">Objem:</label>
+      <div className="flex flex-col">
+        <label htmlFor="volume" className="mb-1 font-medium">
+          Objem:
+        </label>
         <input
           id="volume"
           name="volume"
           value={formik.values.volume}
           onChange={formik.handleChange}
+          className="border rounded p-2 focus:ring-2 focus:ring-indigo-400"
         />
-        {formik.touched && formik.errors.volume && (
-          <div>{formik.errors.volume}</div>
+        {formik.touched.volume && formik.errors.volume && (
+          <p className="text-red-500 text-sm">{formik.errors.volume}</p>
         )}
       </div>
-      <button type="submit">Přidat místnost</button>
+      <button
+        type="submit"
+        className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition"
+      >
+        Přidat místnost
+      </button>
     </form>
   );
 };

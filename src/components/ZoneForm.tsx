@@ -11,39 +11,37 @@ interface ZoneFormValues {
 
 const ZoneForm: React.FC = () => {
   const dispatch = useAppDispatch();
-
   const formik = useFormik<ZoneFormValues>({
     initialValues: { name: "" },
-    validationSchema: Yup.object({
-      name: Yup.string().required("Povinné"),
-    }),
+    validationSchema: Yup.object({ name: Yup.string().required("Povinné") }),
     onSubmit: (values, { resetForm }) => {
-      dispatch(
-        addZone({
-          id: uuidv4(),
-          name: values.name,
-          roomIds: [],
-        })
-      );
+      dispatch(addZone({ id: uuidv4(), name: values.name, roomIds: [] }));
       resetForm();
     },
   });
-
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <div>
-        <label htmlFor="name">Název zóny:</label>
+    <form onSubmit={formik.handleSubmit} className="space-y-4 mb-6">
+      <div className="flex flex-col">
+        <label htmlFor="name" className="mb-1 font-medium">
+          Název zóny:
+        </label>
         <input
           id="name"
           name="name"
           value={formik.values.name}
           onChange={formik.handleChange}
+          className="border rounded p-2 focus:ring-2 focus:ring-indigo-400"
         />
         {formik.touched.name && formik.errors.name && (
-          <div>{formik.errors.name}</div>
+          <p className="text-red-500 text-sm">{formik.errors.name}</p>
         )}
       </div>
-      <button type="submit">Přidat zónu</button>
+      <button
+        type="submit"
+        className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+      >
+        Přidat zónu
+      </button>
     </form>
   );
 };

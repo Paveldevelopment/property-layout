@@ -12,7 +12,7 @@ const zoneSlice = createSlice({
       state.push(action.payload);
     },
     removeZone: (state, action: PayloadAction<string>) => {
-      return state.filter((z) => z.id !== action.payload); // PAV proc je tady return a jinde neni?
+      return state.filter((z) => z.id !== action.payload);
     },
     updateZone: (
       state,

@@ -1,4 +1,3 @@
-// PAV src/features/zones/zoneSelectors.ts
 import { createSelector } from "@reduxjs/toolkit";
 import type { RootState } from "../../store";
 import type { Zone } from "../../types/zone";
@@ -7,9 +6,6 @@ import type { Room } from "../../types/room";
 const selectZones = (state: RootState) => state.zones;
 const selectRooms = (state: RootState) => state.rooms;
 
-/**
- * PAV Vrátí každou zónu rozšířenou o totalArea a totalVolume
- */
 export const selectZonesWithTotals = createSelector(
   [selectZones, selectRooms],
   (zones: Zone[], rooms: Room[]) => {

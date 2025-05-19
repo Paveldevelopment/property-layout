@@ -1,18 +1,19 @@
 import React from "react";
-import ZoneList from "./ZoneList";
-import RoomList from "./RoomList";
-import RoomForm from "./RoomForm";
 import ZoneForm from "./ZoneForm";
+import ZoneList from "./ZoneList";
+import RoomForm from "./RoomForm";
+import RoomList from "./RoomList";
 
 const Layout: React.FC = () => (
-  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
+  <div className="max-w-5xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
     <section>
-      <h2>Zóny</h2>
+      <h2 className="text-2xl mb-2">Zóny</h2>
       <ZoneForm />
       <ZoneList />
     </section>
+
     <section>
-      <h2>Místnosti</h2>
+      <h2 className="text-2xl mb-2">Místnosti</h2>
       <RoomForm />
       <RoomList />
     </section>
