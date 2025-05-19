@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-// import zonesReducer from "./features/zones/zoneSlice";
-// import roomsReducer from "./features/rooms/roomSlice";
+import zonesReducer from "./features/zones/zoneSlice";
+import roomsReducer from "./features/rooms/roomSlice";
 
 const store = configureStore({
   reducer: {
-    // zones: zonesReducer,
-    // rooms: roomsReducer,
+    zones: zonesReducer,
+    rooms: roomsReducer,
   },
 });
 
